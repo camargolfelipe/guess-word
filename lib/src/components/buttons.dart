@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:template/src/utils/colors.dart';
-import 'package:template/src/utils/routes.dart';
+import 'package:template/src/utils/strings.dart';
 
 class PrimaryButton extends StatelessWidget {
   Function()? function;
