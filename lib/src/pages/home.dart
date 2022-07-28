@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:guessWord/src/utils/routes.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:template/main.dart';
-import 'package:template/src/utils/colors.dart';
-import 'package:template/src/utils/strings.dart';
+import 'package:guessWord/main.dart';
+import 'package:guessWord/src/utils/colors.dart';
+import 'package:guessWord/src/utils/strings.dart';
 import '../components/home/keyboard.dart';
 import '../components/home/wordTry.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -28,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     Strings string = Strings();
-
+    Routes route = Routes();
     return Scaffold(
         key: _scaffoldKey,
         backgroundColor: backgroundColor,
@@ -40,10 +42,36 @@ class _HomePageState extends State<HomePage> {
           actions: [
             IconButton(
               icon: Icon(
-                LineIcons.home,
+                LineIcons.music,
+                color: enableSound() ? green : secondColor,
+              ),
+              onPressed: () {
+                if (enableSound()) {
+                  setState(() {
+                    storage.write('sound', null);
+                    assetsAudioPlayer.stop();
+                  });
+                } else {
+                  setState(() {
+                    storage.write('sound', true);
+                    assetsAudioPlayer.open(
+                        Playlist(audios: [
+                          Audio("assets/sound/background-sound-two.mp3"),
+                        ]),
+                        volume: 0.5,
+                        loopMode: LoopMode.playlist);
+                  });
+                }
+              },
+            ),
+            IconButton(
+              icon: Icon(
+                LineIcons.info,
                 color: secondColor,
               ),
-              onPressed: () {},
+              onPressed: () {
+                route.simple(context, '/ranking');
+              },
             ),
           ],
         ),
@@ -66,7 +94,7 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Builder(
             builder: (context) => ListView(children: [
-                  Container(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height * 0.63,
                     child: Column(
                       children: [
@@ -143,6 +171,14 @@ class _HomePageState extends State<HomePage> {
       fourthIsVisible = false;
       fifthIsVisible = false;
       first.clear();
+    }
+  }
+
+  bool enableSound() {
+    if (storage.read('sound') == null) {
+      return false;
+    } else {
+      return true;
     }
   }
 

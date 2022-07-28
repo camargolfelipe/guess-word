@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:template/src/utils/strings.dart';
+import 'package:guessWord/src/utils/strings.dart';
 import '../../../main.dart';
 import '../../utils/colors.dart';
 

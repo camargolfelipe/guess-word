@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:template/src/pages/home.dart';
+import 'package:guessWord/src/pages/home.dart';
+import 'package:guessWord/src/pages/login.dart';
+import '../pages/ranking.dart';
 
 final appRoutes = {
-  '/': (context) => HomePage(),
+  '/': (context) => LoginPage(),
+  '/home': (context) => HomePage(),
+  '/ranking': (context) => RankingPage(),
 };
 
 //FUNCTIONS

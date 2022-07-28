@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:template/src/utils/colors.dart';
-import 'package:template/src/utils/strings.dart';
+import 'package:guessWord/src/utils/colors.dart';
+import 'package:guessWord/src/utils/strings.dart';
 
 class PrimaryButton extends StatelessWidget {
   Function()? function;
@@ -11,7 +11,7 @@ class PrimaryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     Strings strings = Strings();
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 24.0),
+      padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 24.0),
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20), color: mainColor),
